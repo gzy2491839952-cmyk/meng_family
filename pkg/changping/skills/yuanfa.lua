@@ -1,6 +1,7 @@
 local skill=fk.CreateSkill{name="changping__yuanfa"}
 local disabled="@@changping__yuanfa_disabled"
 skill:addEffect(fk.EventPhaseEnd,{
+  audio_index={1,2},
   can_trigger=function(self,event,target,player,data)
     return target and target~=player and target.phase==Player.Play and not target.dead
       and player:hasSkill(skill.name) and player:getMark(disabled)==0 and player:canPindian(target)
@@ -50,7 +51,23 @@ skill:addEffect(fk.TurnStart,{
     player.room:validateSkill(player,skill.name,nil,skill.name)
   end,
 })
+skill:addEffect(fk.GameFinished,{
+  global=true,
+  can_refresh=function(self,event,target,player,data)
+    return (player.general=="changping__yingji" or player.deputyGeneral=="changping__yingji")
+      and table.contains(data.players or {},player)
+      and player:getMark("changping__yingji_victory_voice")==0
+  end,
+  on_refresh=function(self,event,target,player,data)
+    player.room:setPlayerMark(player,"changping__yingji_victory_voice",1)
+    player.room:broadcastPlaySound("./packages/meng_family/audio/win/changping__yingji")
+  end,
+})
 Fk:loadTranslationTable{
+  ["!changping__yingji"]="自寡人即位，未尝一日忘却东出。今日得此疆土，当告秦之先君！",
+  ["~changping__yingji"]="后世子孙，莫负寡人……",
+  ["$changping__yuanfa1"]="纵隔千山，秦旗亦至城下！",
+  ["$changping__yuanfa2"]="崤函岂是秦疆之尽？寡人所望，犹在诸国之外！",
   ["changping__yuanfa"]="远伐",
   [":changping__yuanfa"]="其他角色出牌阶段结束时，你可以与其拼点且你此次拼点牌点数-X：若你赢，你视为对其使用一张额外亮出X张牌的【兵临城下】（X为你计算与其距离）；若其赢，“远伐”失效至你下回合开始。",
   [disabled]="远伐失效",

@@ -7,6 +7,7 @@ local function eligible(player)
   end)
 end
 skill:addEffect(fk.EventPhaseStart,{
+  audio_index={1,2},
   can_trigger=function(self,event,target,player,data)
     if not target or target.dead or player.dead or not player:hasSkill(skill.name) then return false end
     if target==player then return player.phase==Player.Start and #eligible(player)>0 end
@@ -70,7 +71,23 @@ skill:addEffect(fk.EventPhaseStart,{
     end
   end,
 })
+skill:addEffect(fk.GameFinished,{
+  global=true,
+  can_refresh=function(self,event,target,player,data)
+    return (player.general=="changping__fanju" or player.deputyGeneral=="changping__fanju")
+      and table.contains(data.players or {},player)
+      and player:getMark("changping__fanju_victory_voice")==0
+  end,
+  on_refresh=function(self,event,target,player,data)
+    player.room:setPlayerMark(player,"changping__fanju_victory_voice",1)
+    player.room:broadcastPlaySound("./packages/meng_family/audio/win/changping__fanju")
+  end,
+})
 Fk:loadTranslationTable{
+  ["$changping__qingwei1"]="君既推心相待，范某岂敢不报？",
+  ["$changping__qingwei2"]="君以利刃相赠，吾当原物奉还！",
+  ["!changping__fanju"]="远交以安诸国，近攻以拓秦疆。臣为王谋者，岂止一时之胜！",
+  ["~changping__fanju"]="恩仇皆偿……唯负秦王知遇……",
   ["changping__qingwei"]="倾危",
   [":changping__qingwei"]="其他角色的出牌阶段开始时，其可将一张牌当【推心置腹】或【过河拆桥】对你使用。然后你可受到其造成的1点伤害，改为视为对其使用之。准备阶段，你可令未对你发动过首句效果的角色各交给你至少一张牌。",
   ["#changping__qingwei-offer"]="倾危：你可将一张牌当推心置腹或过河拆桥对 %dest 使用",

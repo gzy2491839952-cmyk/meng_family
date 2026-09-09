@@ -14,6 +14,7 @@ local function missing(player)
   return buckets
 end
 skill:addEffect(fk.EnterDying,{
+  audio_index={1,2},
   can_trigger=function(self,event,target,player,data)
     return not player.dead and player:hasSkill(skill.name) and player:getMark(used)==0
   end,
@@ -41,6 +42,8 @@ skill:addEffect(fk.EnterDying,{
   end,
 })
 Fk:loadTranslationTable{
+  ["$changping__tunshi1"]="六国各据一隅，寡人，独取天下！",
+  ["$changping__tunshi2"]="列国衰亡之日，正是大秦进取之时！",
   ["changping__tunshi"]="吞世",
   [":changping__tunshi"]="每回合限一次，当一名角色进入濒死状态时，你可以展示所有手牌并获得中央区手牌中缺失的花色的牌各一张，若你没有手牌，则无须展示手牌。",
 }

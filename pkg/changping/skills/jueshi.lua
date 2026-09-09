@@ -4,6 +4,7 @@ local function payable(player)
   return #ids>0 and not table.find(ids,function(id)return player:prohibitDiscard(id) end)
 end
 skill:addEffect(fk.CardUsing,{
+  audio_index={1,2},
   can_trigger=function(self,event,target,player,data)
     return target and not player.dead and player:hasSkill(skill.name)
       and player.room.current~=player and data.card.trueName=="slash" and payable(player)
@@ -28,6 +29,8 @@ skill:addEffect(fk.CardUsing,{
   end,
 })
 Fk:loadTranslationTable{
+  ["$changping__jueshi1"]="此战所系，乃大秦国运！",
+  ["$changping__jueshi2"]="秦人之剑，既已出鞘，岂容空还！",
   ["changping__jueshi"]="决势",
   [":changping__jueshi"]="主公技，你的回合外，当一名角色使用【杀】时，你可以弃置所有手牌并选择一项：1.此【杀】不能被响应；2.此【杀】伤害+1。背水：该角色为秦势力角色。",
   ["#changping__jueshi"]="决势：是否弃置所有手牌，强化 %dest 使用的杀？",

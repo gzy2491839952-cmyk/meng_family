@@ -49,6 +49,7 @@ return function(locked)
     end
   end
   skill:addEffect(fk.AfterCardsMove, {
+    audio_index=1,
     can_trigger=function(self,event,target,player,data)
       return enabled(player) and not (data.changping_yazi_done or {})[player.id]
         and #sources(player,data)>0
@@ -69,6 +70,7 @@ return function(locked)
     end,
   })
   skill:addEffect(fk.Damaged, {
+    audio_index=2,
     can_trigger=function(self,event,target,player,data)
       return target==player and enabled(player) and data.from and not data.from.dead
         and not (data.changping_yazi_damage_done or {})[player.id]
@@ -100,6 +102,8 @@ return function(locked)
   })
   local effect="当你获得一名其他角色至少两张牌后，令其摸一张牌；当你受到1点伤害后，令伤害来源交给你一张手牌或失去1点体力，若交给你的牌不是红桃牌，你摸一张牌。然后，阳：弃置一张牌，将此技能永久修改为锁定技；阴：回复1点体力。"
   Fk:loadTranslationTable{
+    ["$"..name.."1"]="昔受一饭之恩，今当千金以报！",
+    ["$"..name.."2"]="尔昔辱我于堂下，可曾料有今日？",
     [name]="睚眦",[":"..name]=(locked and "锁定技，转换技，" or "转换技，你可于下述时机发动：")..effect,
     ["@@changping__yazi_locked"]="睚眦·锁定",
     ["#changping__yazi-invoke"]="睚眦：是否对 %dest 发动恩怨，并执行当前转换项？",
