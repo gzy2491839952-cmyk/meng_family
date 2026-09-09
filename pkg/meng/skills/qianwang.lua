@@ -3,6 +3,7 @@ local skill = fk.CreateSkill { name = "meng__qianwang", tags = { Skill.Lord } }
 -- This event precedes the normal lord-death victory check in FreeKill 0.5.21.
 skill:addEffect(fk.BeforeGameOverJudge, {
   priority = 10,
+  audio_index={1,2},
   anim_type = "support",
   can_trigger = function(self, event, target, player, data)
     local killer = data.killer
@@ -31,6 +32,9 @@ skill:addEffect(fk.BeforeGameOverJudge, {
 })
 
 Fk:loadTranslationTable {
+  ["$meng__qianwang1"]="丞相！丞相何在？替朕传诏，我不当这皇帝了！",
+  ["$meng__qianwang2"]="愿与妻子为黔首，只求留我一命……",
+
   ["meng__qianwang"] = "黔亡",
   [":meng__qianwang"] = "主公技，其他秦势力角色击杀你后，若其不为反贼，其可以明置身份牌并成为主公，回复所有体力值并摸三张牌。",
   ["#meng__qianwang-invoke"] = "黔亡：是否明置身份牌并成为主公，回复所有体力值并摸三张牌？",

@@ -35,6 +35,7 @@ end
 for _, pair in ipairs {{fk.Damage,cause},{fk.Damaged,receive}} do
   local timing, mark = pair[1], pair[2]
   skill:addEffect(timing, {
+    audio_index={1,2},
     global=true,
     -- Resolve old promises before allowing this event to create a new promise.
     -- Snapshot/clear every owner before drawing can trigger nested damage.
@@ -70,6 +71,9 @@ for _, pair in ipairs {{fk.Damage,cause},{fk.Damaged,receive}} do
   })
 end
 Fk:loadTranslationTable {
+  ["$daxi__qiulan1"]="二公皆与我共历生死，何至今日，竟难同舟！",
+  ["$daxi__qiulan2"]="此身既入惊涛，当与诸君共济。",
+
   ["daxi__qiulan"]="泅澜",
   [":daxi__qiulan"]="当你造成/受到伤害后，可以令下一名造成/受到伤害的角色摸两张牌；且摸牌时，你可弃置任意张红色牌，改为由手牌数第X多的一名角色摸牌，不变则多摸X张。（X为弃牌数）",
   [cause]="泅澜·下次造成",

@@ -1,6 +1,7 @@
 local R = require "packages.meng_family.pkg.daxi.liuwenxiu_util"
 local skill = fk.CreateSkill {name="daxi__jihui",tags={Skill.Compulsory}}
 skill:addEffect(fk.EventPhaseStart, {
+  audio_index={1,2},
   anim_type="offensive",
   can_trigger=function(self,event,target,player,data)
     return target==player and player:hasSkill(skill.name) and player.phase==Player.Finish
@@ -34,7 +35,24 @@ skill:addEffect(fk.EventPhaseStart, {
     room:setPlayerMark(player,R.excluded,victim.id)
   end,
 })
+skill:addEffect(fk.GameFinished, {
+  global=true,
+  can_refresh=function(self,event,target,player,data)
+    return (player.general=="daxi__liuwenxiu" or player.deputyGeneral=="daxi__liuwenxiu")
+      and table.contains(data.players or {},player)
+      and player:getMark("daxi__liuwenxiu_victory_voice")==0
+  end,
+  on_refresh=function(self,event,target,player,data)
+    player.room:setPlayerMark(player,"daxi__liuwenxiu_victory_voice",1)
+    player.room:broadcastPlaySound("./packages/meng_family/audio/win/daxi__liuwenxiu")
+  end,
+})
 Fk:loadTranslationTable {
+  ["!daxi__liuwenxiu"]="与诸君，终见山河无恙！",
+  ["~daxi__liuwenxiu"]="退狼进虎，晋王必败国……",
+  ["$daxi__jihui1"]="国事已危，二公何苦相争……",
+  ["$daxi__jihui2"]="进，恐伤兄弟之义……退，又误复明之机……",
+
   ["daxi__jihui"]="忣恢",
   [":daxi__jihui"]="锁定技，结束阶段，你须对体力值最少的一名角色造成1点伤害，令其可以使用一张【杀】并回复1点体力，使你下次发动技能计算排名不包含其。",
   [R.excluded]="忣恢·下次排名排除",

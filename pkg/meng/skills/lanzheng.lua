@@ -17,6 +17,7 @@ local function counts(player, data)
 end
 
 skill:addEffect(fk.AfterCardsMove, {
+  audio_index={1,2},
   anim_type = "control",
   can_trigger = function(self, event, target, player, data)
     if not player:hasSkill(skill.name) or player:getMark(used) > 0 then return false end
@@ -87,7 +88,24 @@ skill:addEffect(fk.DamageInflicted, {
   end,
 })
 
+skill:addEffect(fk.GameFinished, {
+  global=true,
+  can_refresh=function(self,event,target,player,data)
+    return (player.general=="meng__huhai" or player.deputyGeneral=="meng__huhai")
+      and table.contains(data.players or {},player)
+      and player:getMark("meng__huhai_victory_voice")==0
+  end,
+  on_refresh=function(self,event,target,player,data)
+    player.room:setPlayerMark(player,"meng__huhai_victory_voice",1)
+    player.room:broadcastPlaySound("./packages/meng_family/audio/win/meng__huhai")
+  end,
+})
 Fk:loadTranslationTable {
+  ["!meng__huhai"]="什么乱臣贼子，不过扰了朕几日清闲！",
+  ["~meng__huhai"]="帝位不要了……只求做个黔首……也不成么……",
+  ["$meng__lanzheng1"]="丞相通晓律令，赵高深知朕意，天下之事，付与二卿足矣！",
+  ["$meng__lanzheng2"]="朕养百官，难道还须事事亲问？！",
+
   ["meng__lanzheng"] = "滥政",
   [":meng__lanzheng"] = "每回合限一次，当你摸或弃任意牌时，你可以令一名其他角色亦执行之，然后你与手牌数最多的角色本轮下次受到的伤害+1。",
   ["meng__lanzheng_draw"] = "令其他角色摸等量的牌",

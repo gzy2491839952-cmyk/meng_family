@@ -26,6 +26,7 @@ skill:addEffect(fk.MaxHpChanged, {
 })
 
 skill:addEffect(fk.TurnEnd, {
+  audio_index={1,2},
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
     return player:hasSkill(skill.name) and player:getMark(changed) > 0 and player:isWounded()
@@ -38,6 +39,9 @@ skill:addEffect(fk.TurnEnd, {
 })
 
 Fk:loadTranslationTable {
+  ["$meng__siyu1"]="四海皆奉朕一人，岂有天子须为百姓省用之理！",
+  ["$meng__siyu2"]="阿房未成，钟鼓未尽，莫拿这些国事扫朕的兴！",
+
   ["meng__siyu"] = "肆欲",
   [":meng__siyu"] = "每个回合结束时，若此回合你的体力值发生过变化，你摸x张牌。（x为你已损失的体力值）",
 }
