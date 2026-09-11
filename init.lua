@@ -4,7 +4,8 @@ local extension = require "packages.meng_family.pkg.meng"
 local daxi = require "packages.meng_family.pkg.daxi"
 local xi = require "packages.meng_family.pkg.xi"
 local changping = require "packages.meng_family.pkg.changping"
-local packages = { extension, daxi, xi, changping }
+local weekly = require "packages.meng_family.pkg.weekly"
+local packages = { extension, daxi, xi, changping, weekly }
 -- Use a dedicated display key; preserve faction and state translations.
 for _, pack in ipairs(packages) do
   for _, general in ipairs(pack.generals) do
