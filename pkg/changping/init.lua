@@ -28,7 +28,12 @@ linxiangru:addSkills{"changping__hejiang","changping__guibi"}
 local zhaodan=General:new(extension,"changping__zhaodan","meng_zhao",3,3,General.Male)
 zhaodan:addSkills{"changping__zeshuai","changping__zhuimeng","changping__xiaocheng"}
 extension:loadCardSkels{fk.CreateCard{name="changping__zhaoshuaifu",type=Card.TypeEquip,sub_type=Card.SubtypeTreasure,equip_skill="#changping__zhaoshuaifu_skill"}}
+local dreamZhaokuo=General:new(extension,"dream__zhaokuo","meng_zhao",4,4,General.Male)
+dreamZhaokuo:addSkills{"dream__pishi","dream__xiwei"}
+dreamZhaokuo:addRelatedSkill("dream__yiqi")
 Fk:loadTranslationTable {
+ ["dream__zhaokuo"]="梦赵括",["#dream__zhaokuo"]="逆转长平",
+ ["designer:dream__zhaokuo"]="头发好借好还",["illustrator:dream__zhaokuo"]="黑羽C",
  ["changping__zhaodan"]="赵丹",["#changping__zhaodan"]="无断的坠龙",
  ["designer:changping__zhaodan"]="头发好借好还",["illustrator:changping__zhaodan"]="黄球球",
  ["changping__zhaokuo"]="赵括",["#changping__zhaokuo"]="纸上谈兵",

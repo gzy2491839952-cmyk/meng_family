@@ -18,7 +18,8 @@ skill:addEffect(fk.AfterCardsMove, {
       if move.to and (move.toArea==Card.PlayerHand or move.toArea==Card.PlayerEquip) and table.find(move.moveInfo,function(info)
         return move.from~=move.to or info.fromArea~=move.toArea
       end) then
-        if move.moveReason==fk.ReasonDraw and prev then
+        -- Jiaodu draws still update gain history, but cannot trigger Jiaodu again.
+        if move.moveReason==fk.ReasonDraw and move.skillName~=skill.name and prev then
           table.insert(pairs,{drawer=move.to.id,previous=prev})
         end
         prev=move.to.id
@@ -100,7 +101,7 @@ Fk:loadTranslationTable {
   ["~daxi__sunkewang"] = "故人已绝……新主亦不容我……",
   ["!daxi__sunkewang"] = "定国徒有战功，安邦终须孤手！",
   ["daxi__jiaodu"]="狡渡",
-  [":daxi__jiaodu"]="一名角色摸牌后，其可以令上一名获得牌的角色摸一张牌，上述两名角色中至少一名需为你。若均为你，则令“狡渡”失效至你下一次体力值变化，且再次生效时，本回合角色回复1点体力。",
+  [":daxi__jiaodu"]="一名角色不因此摸牌后，其可以令上一名获得牌的角色摸一张牌，上述两名角色中至少一名需为你。若均为你，则令“狡渡”失效至你下一次体力值变化，且再次生效时，本回合角色回复1点体力。",
   [stopped]="狡渡失效",
   ["#daxi__jiaodu-draw"]="狡渡：是否令上一名获得牌的角色%dest摸一张牌？",
 }
