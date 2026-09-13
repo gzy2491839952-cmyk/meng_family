@@ -12,6 +12,7 @@ skill:addEffect(fk.GameStart,{
  end,
 })
 local spec={
+ audio_index=0,
  can_trigger=function(self,event,target,p,data)
   if not p:hasSkill(skill.name)then return false end
   local now=present(p.room)
@@ -28,7 +29,7 @@ local spec={
    if #choices>0 then
     table.insert(choices,"Cancel")
     local c=room:askToChoice(p,{choices=choices,skill_name=skill.name,prompt="#dream__lingjue-absorb::"..old})
-    if c~="Cancel"then local ks=M.factions(p);table.insertIfNeed(ks,c);room:setPlayerMark(p,"@dream_lingjue",ks)end
+    if c~="Cancel"then p:broadcastSkillInvoke(skill.name,math.random(2));local ks=M.factions(p);table.insertIfNeed(ks,c);room:setPlayerMark(p,"@dream_lingjue",ks)end
    end
   end
  end,
@@ -50,6 +51,9 @@ for _,ev in ipairs{fk.Death,fk.AfterPropertyChange}do
  })
 end
 Fk:loadTranslationTable{
+ ["$dream__lingjue1"]="自临淄而西，至四海之滨，皆当奉齐正朔！",
+ ["$dream__lingjue2"]="撤其边关，销其兵戈，这天下，再无此诸侯之名！",
+
  ["dream__lingjue"]="凌绝",
  [":dream__lingjue"]="主公技，其他〔齐〕势力角色展示的牌花色均视为黑桃；当场上失去一个势力时，你可以将另一个势力并入〔〕。",
  ["@dream_lingjue"]="凌绝势力",

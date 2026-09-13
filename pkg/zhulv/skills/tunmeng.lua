@@ -1,6 +1,7 @@
 local M=require "packages.meng_family.pkg.zhulv.tiandi"
 local skill=fk.CreateSkill{name="dream__tunmeng"}
 skill:addEffect(fk.EventPhaseStart,{
+ audio_index={1,2},
  can_trigger=function(self,event,target,p,data)
   return target==p and p.phase==Player.Start and p:hasSkill(skill.name) and table.find(p.room.alive_players,function(t)return t.chained and not t:isKongcheng()end)~=nil
  end,
@@ -21,6 +22,8 @@ skill:addEffect(fk.EventPhaseStart,{
  end,
 })
 Fk:loadTranslationTable{
+ ["$dream__tunmeng1"]="盟书不必再改，诸国之名，朕自会逐一勾去！",
+ ["$dream__tunmeng2"]="诸卿既各怀异志，何不尽归于齐！",
  ["dream__tunmeng"]="吞盟",
  [":dream__tunmeng"]="准备阶段，你可以令横置角色议事，若结果为：红色，重置意见为黑的角色；黑色，你获得所有黑色议事牌。",
  ["#dream__tunmeng-vote"]="吞盟议事：秘密选择一张手牌，所有人选定后同时展示",

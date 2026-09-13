@@ -1,5 +1,6 @@
 local skill=fk.CreateSkill{name="dream__pizhi"}
 skill:addEffect(fk.RoundStart,{
+ audio_index={1,2},
  can_trigger=function(self,event,target,p,data)return p:hasSkill(skill.name)end,
  on_cost=function(self,event,target,p,data)return p.room:askToSkillInvoke(p,{skill_name=skill.name})end,
  on_use=function(self,event,target,p,data)
@@ -33,6 +34,9 @@ skill:addEffect(fk.RoundStart,{
  end,
 })
 Fk:loadTranslationTable{
+ ["$dream__pizhi1"]="朕身旁吹竽一客，胜过公子门下三千虚名！",
+ ["$dream__pizhi2"]="顺齐者，裂土封侯；逆齐者，俯首受刃！",
+
  ["dream__pizhi"]="睥峙",
  [":dream__pizhi"]="每轮开始时，你可以亮出牌堆顶X张牌（X为存活的角色数），令所有角色依次选择一项：1.横置并获得其中一张；2.令你获得其中一张并交给其一张牌。",
  ["dream_pizhi_chain"]="横置并获得一张亮出的牌",["dream_pizhi_exchange"]="令梦田地获得一张，然后交给你一张牌",

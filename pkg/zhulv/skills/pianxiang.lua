@@ -1,6 +1,7 @@
 local M=require "packages.meng_family.pkg.zhulv.tiandi"
 local skill=fk.CreateSkill{name="dream__pianxiang"}
 skill:addEffect("active",{
+ audio_index={1,2},
  min_card_num=0,max_card_num=999,target_num=1,max_phase_use_time=1,
  can_use=function(self,p)return p.phase==Player.Play and p:usedSkillTimes(skill.name,Player.HistoryPhase)==0 end,
  card_filter=function(self,p,id,selected)return table.contains(p:getCardIds("h"),id) and not M.revealed.shown(p,id)end,
@@ -16,6 +17,9 @@ skill:addEffect("active",{
  end,
 })
 Fk:loadTranslationTable{
+ ["$dream__pianxiang1"]="借汝连营为薪，燃我西进之炬！",
+ ["$dream__pianxiang2"]="待中军火起，便让五国兵马，尽作飞灰！",
+
  ["dream__pianxiang"]="偏袭",
  [":dream__pianxiang"]="出牌阶段限一次，你可以明置任意张手牌并视为使用【火攻】，若展示牌与弃置牌明暗置状态不同，此牌伤害+1。",
 }

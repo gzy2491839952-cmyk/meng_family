@@ -1,3 +1,5 @@
+require("packages.meng_family.pkg.changping.shenhui_choice").install()
+require("packages.meng_family.pkg.changping.god_kingdom").install()
 local extension = Package:new("meng_changping_pack")
 extension.extensionName = "meng_family"
 extension:loadSkillSkelsByPath("./packages/meng_family/pkg/changping/skills")
@@ -31,7 +33,24 @@ extension:loadCardSkels{fk.CreateCard{name="changping__zhaoshuaifu",type=Card.Ty
 local dreamZhaokuo=General:new(extension,"dream__zhaokuo","meng_zhao",4,4,General.Male)
 dreamZhaokuo:addSkills{"dream__pishi","dream__xiwei"}
 dreamZhaokuo:addRelatedSkill("dream__yiqi")
+if not Fk:getDamageNature(fk.IceDamage) then Fk:addDamageNature(fk.IceDamage,"ice_damage",true)end
+local godLianpo=General:new(extension,"hanqing_god__lianpo","god",3,5,General.Male)
+godLianpo:addSkills{"hqgod__fengrang","hqgod__shuanghai"}
+local godBaiqi=General:new(extension,"hanqing_god__baiqi","god",6,6,General.Male)
+godBaiqi:addSkills{"hqgod__tuqian","hqgod__liaofan"}
+extension:loadCardSkels{fk.CreateCard{name="hqice__slash",type=Card.TypeBasic,is_damage_card=true,skill="hqice__slash_skill"}}
+local mibazi=General:new(extension,"changping__mibazi","meng_qin",3,3,General.Female)
+mibazi:addSkills{"changping__qingjun","changping__sichen","changping__shenhui"}
 Fk:loadTranslationTable {
+ ["changping__mibazi"]="芈八子",["#changping__mibazi"]="椒房遗梦",
+ ["designer:changping__mibazi"]="森博十夜",["illustrator:changping__mibazi"]="小猫°",
+
+ ["hanqing_god__lianpo"]="神廉颇",["#hanqing_god__lianpo"]="终啸寒风",
+ ["designer:hanqing_god__lianpo"]="头发好借好还",["illustrator:hanqing_god__lianpo"]="有硬币有果",
+ ["hanqing_god__baiqi"]="神白起",["#hanqing_god__baiqi"]="人屠",
+ ["designer:hanqing_god__baiqi"]="楚萱",["illustrator:hanqing_god__baiqi"]="明天不睡觉",
+ ["hqice__slash"]="冰杀",[":hqice__slash"]="对目标造成1点冰冻伤害。",
+
  ["dream__zhaokuo"]="梦赵括",["#dream__zhaokuo"]="逆转长平",
  ["designer:dream__zhaokuo"]="头发好借好还",["illustrator:dream__zhaokuo"]="黑羽C",
  ["changping__zhaodan"]="赵丹",["#changping__zhaodan"]="无断的坠龙",
