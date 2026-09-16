@@ -13,6 +13,8 @@ local zishi = require "packages.meng_family.pkg.zishi"
 local qiaojiang = require "packages.meng_family.pkg.qiaojiang"
 local liuhe = require "packages.meng_family.pkg.liuhe"
 local packages = { extension, daxi, xi, changping, weekly, shengmo, zhulv, zongheng, xingming, zishi, qiaojiang, liuhe }
+require("packages.meng_family.pkg.weekly.leyi_general").install(weekly)
+require("packages.meng_family.pkg.weekly.tiandan_general").install(weekly)
 -- Use a dedicated display key; preserve faction and state translations.
 for _, pack in ipairs(packages) do
   for _, general in ipairs(pack.generals) do
