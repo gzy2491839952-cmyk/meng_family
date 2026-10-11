@@ -51,4 +51,14 @@ Fk:loadTranslationTable{
  ["weekly__kuangzhang"]="匡章",["#weekly__kuangzhang"]="累战齐威",
  ["designer:weekly__kuangzhang"]="可余雪",["illustrator:weekly__kuangzhang"]="啪啪三国",
 }
+-- BEGIN HANQING CHULIJI
+require("packages.meng_family.pkg.weekly.chuliji").install(extension)
+local chuliji = General:new(extension, "weekly__chuliji", "meng_qin", 4, 4, General.Male)
+chuliji:addSkills { "hqchuliji__nangzhi", "hqchuliji__recast", "hqchuliji__yunce" }
+Fk:loadTranslationTable {
+  ["weekly__chuliji"] = "樗里疾", ["#weekly__chuliji"] = "秦之智囊",
+  ["designer:weekly__chuliji"] = "我莫得法", ["illustrator:weekly__chuliji"] = "葛鸽",
+}
+-- END HANQING CHULIJI
+
 return extension

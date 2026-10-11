@@ -1,6 +1,7 @@
 local R=require "packages.meng_family.pkg.zhulv.revealed"
 local skill=fk.CreateSkill{name="hqgod__tuqian"}
 skill:addEffect("active",{
+ audio_index={1,2},
  card_num=0,target_num=0,max_phase_use_time=1,
  can_use=function(self,p)return p.phase==Player.Play and p:usedSkillTimes(skill.name,Player.HistoryPhase)==0 end,
  on_use=function(self,room,e)

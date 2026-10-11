@@ -4,6 +4,7 @@ local function targets(room)
  return table.filter(room.alive_players,function(p)return not p:isKongcheng() and #R.cards(p,false)==0 end)
 end
 skill:addEffect(fk.TurnEnd,{
+ audio_index={1,2},
  can_trigger=function(self,e,t,p,d)return p:hasSkill(skill.name) and #targets(p.room)>0 end,
  on_cost=function(self,e,t,p,d)return p.room:askToSkillInvoke(p,{skill_name=skill.name})end,
  on_use=function(self,e,t,p,d)
